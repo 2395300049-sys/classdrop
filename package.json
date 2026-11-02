@@ -1,0 +1,40 @@
+{
+  "name": "classdrop-desktop",
+  "version": "0.1.0",
+  "description": "一码收：通过二维码接收文件的桌面客户端",
+  "main": "desktop/main.cjs",
+  "author": "2395300049-sys and ClassDrop contributors",
+  "license": "MIT",
+  "private": true,
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test desktop/tests/*.test.cjs",
+    "pack": "electron-builder --dir --publish never",
+    "dist": "electron-builder --publish never",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:win": "electron-builder --win --x64 --publish never",
+    "dist:linux": "electron-builder --linux --x64 --publish never"
+  },
+  "devDependencies": { "electron": "45.2.1", "electron-builder": "26.18.0" },
+  "build": {
+    "appId": "io.classdrop.desktop",
+    "productName": "一码收",
+    "artifactName": "ClassDrop-${version}-${os}-${arch}.${ext}",
+    "directories": { "output": "release", "buildResources": "desktop/assets" },
+    "files": ["desktop/**/*", "package.json", "!desktop/tests/**", "!desktop/scripts/**"],
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": ["dmg", "zip"],
+      "icon": "desktop/assets/icon.icns",
+      "identity": "-",
+      "hardenedRuntime": true,
+      "notarize": false
+    },
+    "dmg": { "title": "一码收 ${version}" },
+    "win": { "target": ["nsis"], "icon": "desktop/assets/icon.ico" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "shortcutName": "一码收" },
+    "linux": { "target": ["AppImage"], "category": "Office", "icon": "desktop/assets/icon.png", "executableName": "classdrop" }
+  }
+}

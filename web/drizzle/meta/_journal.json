@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1793617061998,
+      "tag": "0000_special_shen",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1793617726981,
+      "tag": "0001_serious_natasha_romanoff",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793618703638,
+      "tag": "0002_tearful_silver_samurai",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1793620744056,
+      "tag": "0003_chunky_weapon_omega",
+      "breakpoints": true
+    }
+  ]
+}

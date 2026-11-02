@@ -1,0 +1,10 @@
+'use client';
+import {useState} from 'react';
+import {X,Save} from 'lucide-react';
+import {api} from './shared';
+export default function EditCollection({task,close,saved}:any){
+ const [busy,setBusy]=useState(false),[error,setError]=useState('');
+ async function save(e:React.FormEvent<HTMLFormElement>){e.preventDefault();setBusy(true);setError('');const f=new FormData(e.currentTarget);try{await api('/api/tasks/'+task.id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:f.get('title'),course:f.get('course'),description:f.get('description'),deadline:f.get('deadline')?new Date(String(f.get('deadline'))+'+08:00').toISOString():''})});await saved();close();}catch(e:any){setError(e.message);}finally{setBusy(false);}}
+ const deadline=task.deadline?new Date(Date.parse(task.deadline)+8*3600000).toISOString().slice(0,16):'';
+ return <div className="modal-backdrop" onClick={()=>!busy&&close()}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="settings-title" onClick={e=>e.stopPropagation()}><div className="modal-heading"><div><p className="eyebrow">COLLECTION SETTINGS</p><h2 id="settings-title">收件入口设置</h2><p>修改名称与说明后，原来的二维码继续有效。</p></div><button className="icon-button" aria-label="关闭设置" onClick={close} disabled={busy}><X/></button></div><form onSubmit={save}><label>收件名称<input name="title" required maxLength={80} defaultValue={task.title}/></label><label>部门 / 地点 / 课程<input name="course" maxLength={80} defaultValue={task.course}/></label><label>收件说明<textarea name="description" maxLength={1500} rows={4} defaultValue={task.description}/></label><label>截止时间（北京时间）<input name="deadline" type="datetime-local" defaultValue={deadline}/><small>留空表示长期收件。</small></label><div className="form-note">新上传文件保存30天，重新上传的文件从更新时重新计算。已有未设置期限的文件继续保留。</div>{error&&<div className="error">{error}</div>}<div className="modal-actions"><button type="button" className="button secondary" disabled={busy} onClick={close}>取消</button><button className="button" disabled={busy}><Save size={16}/>{busy?'保存中…':'保存设置'}</button></div></form></section></div>;
+}
