@@ -4,7 +4,7 @@
 
 **桌面客户端需要网络和兼容的云端服务。** 本仓库包含客户端与配套 Web 服务源码，不是离线文件服务器。默认连接当前试用服务，也可在设置中填写自己的兼容服务地址。
 
-![桌面客户端预览](docs/desktop-preview.png)
+![桌面客户端预览](docs/account-preview.png)
 
 ## 下载安装
 
@@ -13,7 +13,7 @@
 - Mac Apple Silicon：文件名包含 `mac-arm64`。
 - Mac Intel：文件名包含 `mac-x64`。
 - Windows：下载 `win-x64.exe` 安装包。
-- Linux：下载 `linux-x64.AppImage`。
+- Linux：下载 `linux-x86_64.AppImage`。
 
 只有实际出现在 Release 附件列表中的安装包才已构建完成。
 
